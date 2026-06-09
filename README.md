@@ -1,106 +1,60 @@
-# labirinto-premiado
-# 🚪 Labirinto das Múltiplas Entradas – 20 Fases com Loja e Ciclo Infinito
+# Labirinto do Robozinho
 
-> *“Escolha sua entrada, encontre a única saída. A cada fase, um cenário novo. A cada ciclo, um labirinto renovado.”*
+Jogo de labirinto 17x17 com 20 fases, ciclos infinitos e loja de power-ups.
 
-Um jogo de labirinto onde cada fase tem **de 4 a 10 entradas diferentes** (todas visíveis nas bordas), mas apenas **uma única saída correta**. São 20 fases com **cenários visuais únicos** (cores de parede, chão e fundo mudam a cada fase). Complete as fases, ganhe pontos, compre **guias mágicos** que mostram o caminho mais curto e enfrente **ciclos infinitos** – após a fase 20, todos os labirintos são regenerados com novas rotas e posições de entrada, mantendo sua pontuação.
+## Como jogar â€“ passo a passo
 
-![Exemplo do labirinto](https://via.placeholder.com/600x600?text=Labirinto+com+entradas+verdes)
+1. **Escolha uma entrada**
+   No inÃ­cio de cada fase, vocÃª verÃ¡ cÃ­rculos verdes com o Ã­cone ðŸšª nas bordas do labirinto.
+   Clique em um desses cÃ­rculos para posicionar seu personagem (robozinho) naquela entrada.
+   SÃ³ depois de escolher a entrada vocÃª poderÃ¡ se mover.
 
----
+2. **Movimente-se**
+   Use as setas do teclado (â† â†‘ â†“ â†’) ou os botÃµes na tela (â–² â–¼ â—€ â–¶) para caminhar pelo labirinto.
+   VocÃª nÃ£o pode atravessar paredes â€“ o jogo avisa quando vocÃª bate.
 
-## 🎮 Como jogar – passo a passo
+3. **Encontre a saÃ­da**
+   A saÃ­da Ã© uma estrela â­ (sempre no canto inferior direito do labirinto).
+   Quando seu personagem alcanÃ§ar a estrela, vocÃª completa a fase e ganha 100 pontos.
 
-### 1. Escolha uma entrada
-- No início de cada fase, você verá **círculos verdes** com o ícone 🚪 nas bordas do labirinto.
-- **Clique em um desses círculos** para posicionar seu personagem (robozinho) naquela entrada.
-- Só depois de escolher a entrada você poderá se mover.
+4. **Avance pelas 20 fases**
+   - Fase 1: 4 entradas
+   - Fase 2: 5 entradas
+   - â€¦ atÃ© Fase 7: 10 entradas
+   - Depois os nÃºmeros de entradas variam (4 a 10), mas a fase 20 sempre tem 10 entradas.
+   - Cada fase tem cores e fundo diferentes â€“ cenÃ¡rio totalmente novo!
 
-### 2. Movimente‑se
-- Use as **setas do teclado** (← ↑ ↓ →) ou os **botões na tela** (▲ ▼ ◀ ▶) para caminhar pelo labirinto.
-- Você **não pode atravessar paredes** – o jogo avisa quando você bate.
+5. **Use a loja (power-ups)**
+   Clique no botÃ£o ðŸ›’ LOJA Â· COMPRAR GUIAS.
+   VocÃª pode comprar:
+   - **Guia RÃ¡pido (2s)** â€“ custa 50 pontos. Mostra o caminho mais curto da sua posiÃ§Ã£o atÃ© a saÃ­da por 2 segundos (pontilhado rosa).
+   - **Guia Estendido (3s)** â€“ custa 80 pontos. Mesmo efeito, mas por 3 segundos.
+   Os pontos sÃ£o acumulados ao vencer fases (100 pontos por fase).
 
-### 3. Encontre a saída
-- A saída é uma **estrela ⭐** (sempre no canto inferior direito do labirinto).
-- Quando seu personagem alcançar a estrela, você **completa a fase** e ganha **100 pontos**.
+6. **Ciclo infinito (rejogabilidade eterna)**
+   ApÃ³s completar a fase 20, o jogo entra em um novo ciclo.
+   Todos os 20 labirintos sÃ£o totalmente regenerados â€“ novas rotas internas, novas posiÃ§Ãµes de entrada (mantendo o nÃºmero de entradas de cada fase).
+   Sua pontuaÃ§Ã£o continua acumulando e o contador de ciclo aumenta (Ciclo 1, Ciclo 2, â€¦).
+   VocÃª pode jogar para sempre, sempre com desafios inÃ©ditos.
 
-### 4. Avance pelas 20 fases
-- **Fase 1**: 4 entradas  
-- **Fase 2**: 5 entradas  
-- … até **Fase 7**: 10 entradas  
-- Depois os números de entradas variam (4 a 10), mas a **fase 20 sempre tem 10 entradas**.
-- Cada fase tem **cores e fundo diferentes** – cenário totalmente novo!
+## ðŸ§  MecÃ¢nicas tÃ©cnicas
 
-### 5. Use a loja (power‑ups)
-- Clique no botão **🛒 LOJA · COMPRAR GUIAS**.
-- Você pode comprar:
-  - **Guia Rápido (2s)** – custa 50 pontos. Mostra o **caminho mais curto** da sua posição até a saída por 2 segundos (pontilhado rosa).
-  - **Guia Estendido (3s)** – custa 80 pontos. Mesmo efeito, mas por 3 segundos.
-- Os pontos são acumulados ao vencer fases (100 pontos por fase).
+| Componente | DescriÃ§Ã£o |
+|------------|-----------|
+| Tamanho do labirinto | 17x17 cÃ©lulas (paredes e caminhos) |
+| GeraÃ§Ã£o de labirinto | Algoritmo DFS (backtracking) garantindo caminho vÃ¡lido entre qualquer entrada e a saÃ­da. |
+| Entradas | Posicionadas aleatoriamente nas bordas, mas sempre em cÃ©lulas de caminho. |
+| SaÃ­da | Fixa na cÃ©lula (15,15) â€“ canto inferior direito. |
+| Caminho mais curto | Calculado por BFS (busca em largura) a cada uso do guia. |
+| Loja | Modal simples com pontos acumulados. |
+| Ciclos | ApÃ³s 20 fases, todos os labirintos sÃ£o recriados com nova semente aleatÃ³ria. |
+| Estilos visuais | Cada fase tem tema inspirado nas imagens: clÃ¡ssico preto/branco, linhas finas, hedge verde, e bold. |
 
-### 6. Ciclo infinito (rejogabilidade eterna)
-- Após completar a **fase 20**, o jogo entra em um **novo ciclo**.
-- **Todos os 20 labirintos são totalmente regenerados** – novas rotas internas, novas posições de entrada (mantendo o número de entradas de cada fase).
-- Sua **pontuação continua acumulando** e o contador de ciclo aumenta (Ciclo 1, Ciclo 2, …).
-- Você pode jogar para sempre, sempre com desafios inéditos.
-
----
-
-## 🧠 Mecânicas técnicas
-
-| Componente        | Descrição |
-|------------------|-----------|
-| **Tamanho do labirinto** | 17x17 células (paredes e caminhos) |
-| **Geração de labirinto** | Algoritmo DFS (backtracking) garantindo caminho válido entre qualquer entrada e a saída. |
-| **Entradas** | Posicionadas aleatoriamente nas bordas, mas sempre em células de caminho. |
-| **Saída** | Fixa na célula (15,15) – canto inferior direito. |
-| **Caminho mais curto** | Calculado por BFS (busca em largura) a cada uso do guia. |
-| **Loja** | Modal simples com pontos acumulados. |
-| **Ciclos** | Após 20 fases, todos os labirintos são recriados com nova semente aleatória. |
-| **Estilos visuais** | Cada fase tem ângulo de cor único (HSL variável) para paredes, chão e fundo. |
-
----
-
-## 🕹️ Controles
-
-| Ação               | Teclado         | Botões na tela |
-|--------------------|-----------------|----------------|
-| Mover para cima    | ↑ (seta cima)   | ▲              |
-| Mover para baixo   | ↓ (seta baixo)  | ▼              |
-| Mover para esquerda| ← (seta esquerda)| ◀              |
-| Mover para direita | → (seta direita)| ▶              |
-| Escolher entrada   | Clique no círculo verde | (mesmo) |
-| Abrir loja         | -               | Botão "🛒 LOJA" |
-
-> **No celular:** Use os botões na tela e toque nas entradas verdes.
-
----
-
-## 🧩 Tela do jogo – elementos
-
-- **Cabeçalho**:
-  - `FASE X / 20` – fase atual.
-  - `🚪 Entradas: Y` – número de entradas disponíveis.
-  - `🔄 Ciclo Z` – quantas vezes você já zerou as 20 fases.
-  - `⭐ Pontos` – total acumulado.
-- **Canvas central** – desenha o labirinto, entradas (verde), saída (estrela), personagem e caminho guia.
-- **Botões direcionais** – para dispositivos sem teclado.
-- **Botão da loja** – comprar guias.
-- **Mensagens** – orientações e feedback (erro, sucesso, compra).
-
----
-
-## 🏆 Dicas e estratégias
-
-- **Não clique em nenhuma entrada antes de pensar** – algumas podem estar mais longe da saída.
-- **Use a loja** quando estiver perdido – o guia mostra o caminho exato.
-- **Guarde pontos** para as fases com muitas entradas (10 entradas) – pode ser mais confuso.
-- **Observe as cores** – cada fase tem um tema diferente, mas a lógica do labirinto continua a mesma.
-- **Completar o ciclo 1 é só o começo** – nos ciclos seguintes, as rotas mudam completamente, então decore apenas a estratégia, não o caminho.
-
----
-
-## 📁 Estrutura do projeto
-© 2026 Michel Detilli.
+## Arquivos
+- index.html
+- style.css
+- script.js
+- README.md
+ © 2026 Michel Detilli.
 Todos os direitos reservados. 
 É permitido jogar online. É proibida a cópia, distribuição ou uso comercial do código sem autorização.
