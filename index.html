@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🌀 Labirinto de Múltiplas Entradas · 20 Fases · Loja</title>
+    <title>🏆 Labirinto · Múltiplas Entradas | 20 Fases + Loja</title>
     <style>
         * {
             box-sizing: border-box;
@@ -18,40 +18,39 @@
             font-family: 'Courier New', monospace;
             padding: 20px;
             margin: 0;
+            background: #2a2418;
             transition: background 0.3s;
         }
-        /* Estilos dinâmicos das fases serão injetados via JS, mas base fixa */
         .game-container {
+            background: #fcf3da;
             border-radius: 56px;
             padding: 20px 20px 28px;
             box-shadow: 0 25px 35px rgba(0,0,0,0.5);
-            max-width: 780px;
+            max-width: 800px;
             width: 100%;
-            transition: all 0.3s;
+            transition: background 0.3s;
         }
         h1 {
             text-align: center;
             font-size: 1.6rem;
             margin: 0 0 5px;
-            background: linear-gradient(135deg, #b9532c, #e9b13b);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
+            color: #5a3e2b;
         }
         .sub {
             text-align: center;
             font-size: 0.7rem;
-            background: rgba(0,0,0,0.3);
+            background: #d9c48b;
             display: inline-block;
             width: auto;
             margin: 0 auto 12px;
             padding: 4px 18px;
             border-radius: 60px;
-            color: #fff2c0;
+            color: #3d2a1a;
         }
         .info-panel {
+            background: rgba(0,0,0,0.2);
             border-radius: 48px;
-            padding: 12px 18px;
+            padding: 10px 18px;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
@@ -59,12 +58,11 @@
             gap: 12px;
             margin-bottom: 15px;
             font-weight: bold;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(2px);
         }
         .badge {
-            background: #2b351f;
-            color: #f9e188;
+            background: #4a3624;
+            color: #f9e2a1;
             padding: 6px 16px;
             border-radius: 60px;
             font-size: 0.85rem;
@@ -78,8 +76,9 @@
         canvas {
             display: block;
             margin: 10px auto;
-            border-radius: 28px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: #efe3c9;
+            border-radius: 20px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.3);
             cursor: pointer;
             width: 100%;
             height: auto;
@@ -91,24 +90,24 @@
             margin: 12px 0 10px;
         }
         .ctrl-btn {
-            background: #5e3e2c;
+            background: #7a5a3e;
             border: none;
             font-size: 1.8rem;
             padding: 8px 20px;
             border-radius: 40px;
             color: white;
-            box-shadow: 0 4px 0 #2f1f13;
+            box-shadow: 0 4px 0 #4a2e1a;
             cursor: pointer;
             transition: 0.05s linear;
             font-weight: bold;
         }
         .ctrl-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 1px 0 #2f1f13;
+            box-shadow: 0 1px 0 #4a2e1a;
         }
         .shop-btn {
-            background: #3a6b3c;
-            box-shadow: 0 4px 0 #1c3a1a;
+            background: #5e8c5a;
+            box-shadow: 0 4px 0 #2c4a2a;
             margin-top: 8px;
             width: 100%;
             font-size: 1.2rem;
@@ -121,13 +120,13 @@
             color: white;
         }
         .message {
+            background: #fff0c0;
             border-left: 8px solid #e09d32;
             border-radius: 30px;
             padding: 10px;
             font-size: 0.75rem;
             text-align: center;
             margin: 12px 0 8px;
-            background: rgba(255,240,192,0.9);
             color: #aa5517;
         }
         .modal {
@@ -176,7 +175,7 @@
             text-align: center;
             font-size: 0.6rem;
             margin-top: 16px;
-            opacity: 0.7;
+            color: #7a623c;
         }
         @media (max-width: 550px) {
             .ctrl-btn { font-size: 1.2rem; padding: 6px 14px; }
@@ -187,7 +186,7 @@
 <body>
 <div class="game-container" id="gameContainer">
     <h1>🌀 LABIRINTO · MÚLTIPLAS ENTRADAS</h1>
-    <div style="text-align:center;"><span class="sub">🚪 Escolha uma entrada, encontre a única saída! 🚪</span></div>
+    <div style="text-align:center;"><span class="sub">🚪 Clique numa entrada (círculo verde) e encontre a estrela</span></div>
 
     <div class="info-panel">
         <span class="badge" id="levelDisplay">FASE 1 / 20</span>
@@ -196,7 +195,7 @@
         <span class="points" id="pointsDisplay">⭐ 0 pontos</span>
     </div>
 
-    <canvas id="mazeCanvas" width="550" height="550"></canvas>
+    <canvas id="mazeCanvas" width="600" height="600"></canvas>
 
     <div class="controls">
         <button class="ctrl-btn" id="btnUp">▲</button>
@@ -207,9 +206,9 @@
 
     <button id="shopButton" class="shop-btn">🛒 LOJA · COMPRAR GUIAS 🧭</button>
     <div id="msgArea" class="message">
-        🌟 Clique em uma ENTRADA (círculo verde) para começar! Depois use as setas até a ESTRELA.
+        🌟 Clique em uma ENTRADA (círculo verde) para começar! Depois use as setas até a ⭐.
     </div>
-    <footer>🔁 A cada 20 fases, labirintos regeneram com novas rotas. Cada fase tem cenário visual único!</footer>
+    <footer>🔁 A cada 20 fases, labirintos regeneram com novas rotas. Cada fase tem pequena variação de cor.</footer>
 </div>
 
 <div id="shopModal" class="modal">
@@ -229,17 +228,16 @@
 </div>
 
 <script>
-    // ---------- CONFIGURAÇÕES GLOBAIS ----------
-    const SIZE = 17;          // 17x17 para mais espaço
+    // ---------- CONFIGURAÇÕES ----------
+    const SIZE = 17;          // 17x17 (paredes e caminhos nítidos)
     let currentMaze = [];     // 0=caminho, 1=parede
-    let player = null;        // { x, y } ou null se nenhuma entrada escolhida
-    let exitPos = { x: 15, y: 15 };
-    let entrances = [];       // lista de {x, y}
+    let player = null;
+    let exitPos = { x: SIZE-2, y: SIZE-2 };  // (15,15)
+    let entrances = [];
     let currentLevel = 1;
     let currentCycle = 1;
     let totalPoints = 0;
-    let mazeCache = [];       // guarda labirintos do ciclo atual
-    let entranceCounts = [];  // número de entradas por fase (20 fases)
+    let mazeCache = [];
     
     // Power-up
     let activePath = null;
@@ -256,52 +254,39 @@
     const msgDiv = document.getElementById("msgArea");
     const gameContainer = document.getElementById("gameContainer");
     
-    // ----- DEFINIR NÚMERO DE ENTRADAS PARA CADA FASE (4 a 10, terminando com 10) -----
-    function buildEntranceCounts() {
-        let counts = [];
-        // sequência manual para garantir fase20 = 10
-        for (let i = 1; i <= 20; i++) {
-            if (i <= 7) counts.push(3 + i);  // 4,5,6,7,8,9,10
-            else if (i <= 14) counts.push(3 + (i-7)); // 4..10 novamente
-            else {
-                // últimas 6 fases: 4,5,6,7,8,10 (para terminar com 10)
-                let rest = i - 14;
-                if (rest <= 5) counts.push(3 + rest);
-                else counts.push(10);
-            }
-        }
-        return counts;
-    }
-    const entranceCountsPerPhase = buildEntranceCounts();
+    // ----- NÚMERO DE ENTRADAS POR FASE (4 a 10, terminando com 10 na fase 20) -----
+    const entranceCounts = [
+        4,5,6,7,8,9,10,  // fases 1-7
+        4,5,6,7,8,9,10,  // fases 8-14
+        4,5,6,7,8,10     // fases 15-20 (última = 10)
+    ];
     
-    // ----- ESTILOS CSS ÚNICOS PARA CADA FASE (cores, fundos) -----
-    const phaseStyles = [];
-    for (let i = 1; i <= 20; i++) {
-        phaseStyles.push({
-            bgGradient: `linear-gradient(145deg, hsl(${i * 18}, 60%, 35%), hsl(${i * 18 + 20}, 55%, 20%))`,
-            wallColor: `hsl(${i * 25}, 45%, 35%)`,
-            wallDark: `hsl(${i * 25}, 40%, 25%)`,
-            floorColor: `hsl(${i * 30 + 30}, 70%, 85%)`,
-            floorLight: `hsl(${i * 30 + 30}, 65%, 75%)`,
-            panelBg: `rgba(0,0,0,0.5)`
-        });
-    }
-    
+    // ----- PEQUENAS VARIAÇÕES DE CSS POR FASE (tons sutis, estilo imagem referência) -----
     function applyPhaseStyle(phase) {
-        const style = phaseStyles[(phase-1) % 20];
-        document.body.style.background = style.bgGradient;
-        gameContainer.style.background = `hsl(${(phase*15)+20}, 35%, 88%)`;
-        // os demais elementos serão pintados no drawMaze conforme as cores definidas
+        const hue = (phase * 7) % 36;  // pequena variação entre 0 e 35
+        const wallLight = `hsl(${30 + hue}, 45%, 48%)`;
+        const wallDark = `hsl(${30 + hue}, 50%, 35%)`;
+        const floorLight = `hsl(${45 + hue}, 55%, 82%)`;
+        const floorDark = `hsl(${45 + hue}, 50%, 75%)`;
+        const bgLight = `hsl(${40 + hue}, 40%, 92%)`;
+        gameContainer.style.background = bgLight;
+        // as cores serão usadas no drawMaze, mas guardamos no estilo global
+        window._wallLight = wallLight;
+        window._wallDark = wallDark;
+        window._floorLight = floorLight;
+        window._floorDark = floorDark;
     }
     
-    // ----- GERADOR DE LABIRINTO (DFS) -----
+    // ----- GERADOR DE LABIRINTO (DFS clássico, garantindo caminhos) -----
     function generateMazeWithExitAndEntrances(exitX, exitY, numEntrances) {
         let maze = Array(SIZE).fill().map(() => Array(SIZE).fill(1));
+        // células ímpares são caminho
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 if (i % 2 === 1 && j % 2 === 1) maze[i][j] = 0;
             }
         }
+        // bordas fixas
         for (let i = 0; i < SIZE; i++) {
             maze[0][i] = 1; maze[SIZE-1][i] = 1; maze[i][0] = 1; maze[i][SIZE-1] = 1;
         }
@@ -351,79 +336,80 @@
             }
         }
         
-        // escolher entradas nas bordas (células de caminho)
-        let possibleEntrances = [];
+        // Selecionar entradas nas bordas (células de caminho)
+        let possible = [];
         for (let i = 1; i < SIZE-1; i++) {
-            if (maze[i][1] === 0) possibleEntrances.push({x: i, y: 1});
-            if (maze[i][SIZE-2] === 0) possibleEntrances.push({x: i, y: SIZE-2});
-            if (maze[1][i] === 0) possibleEntrances.push({x: 1, y: i});
-            if (maze[SIZE-2][i] === 0) possibleEntrances.push({x: SIZE-2, y: i});
+            if (maze[i][1] === 0) possible.push({x: i, y: 1});
+            if (maze[i][SIZE-2] === 0) possible.push({x: i, y: SIZE-2});
+            if (maze[1][i] === 0) possible.push({x: 1, y: i});
+            if (maze[SIZE-2][i] === 0) possible.push({x: SIZE-2, y: i});
         }
-        // remove duplicatas de canto
-        possibleEntrances = possibleEntrances.filter(p => !(p.x === exitX && p.y === exitY));
-        if (possibleEntrances.length < numEntrances) {
-            // se não houver suficientes, adiciona algumas internas próximas à borda
+        // remover se for igual à saída
+        possible = possible.filter(p => !(p.x === exitX && p.y === exitY));
+        // Embaralhar e pegar as primeiras 'numEntrances'
+        for (let i = possible.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [possible[i], possible[j]] = [possible[j], possible[i]];
+        }
+        let selected = possible.slice(0, numEntrances);
+        // Garantir que temos exatamente o número desejado (se não, repetir algumas)
+        if (selected.length < numEntrances) {
             for (let i = 2; i < SIZE-2; i++) {
-                if (maze[i][2] === 0 && possibleEntrances.length < numEntrances) possibleEntrances.push({x: i, y: 2});
-                if (maze[i][SIZE-3] === 0 && possibleEntrances.length < numEntrances) possibleEntrances.push({x: i, y: SIZE-3});
-                if (maze[2][i] === 0 && possibleEntrances.length < numEntrances) possibleEntrances.push({x: 2, y: i});
-                if (maze[SIZE-3][i] === 0 && possibleEntrances.length < numEntrances) possibleEntrances.push({x: SIZE-3, y: i});
+                if (maze[i][2] === 0 && !selected.some(e => e.x===i && e.y===2)) selected.push({x: i, y: 2});
+                if (selected.length >= numEntrances) break;
+                if (maze[i][SIZE-3] === 0 && !selected.some(e => e.x===i && e.y===SIZE-3)) selected.push({x: i, y: SIZE-3});
+                if (selected.length >= numEntrances) break;
+                if (maze[2][i] === 0 && !selected.some(e => e.x===2 && e.y===i)) selected.push({x: 2, y: i});
+                if (selected.length >= numEntrances) break;
+                if (maze[SIZE-3][i] === 0 && !selected.some(e => e.x===SIZE-3 && e.y===i)) selected.push({x: SIZE-3, y: i});
+                if (selected.length >= numEntrances) break;
             }
         }
-        // embaralha e pega as primeiras numEntrances
-        for (let i = possibleEntrances.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [possibleEntrances[i], possibleEntrances[j]] = [possibleEntrances[j], possibleEntrances[i]];
-        }
-        let selectedEntrances = possibleEntrances.slice(0, numEntrances);
         
-        return { maze, entrances: selectedEntrances };
+        return { maze, entrances: selected };
     }
     
-    // ----- REGENERA TODOS OS LABIRINTOS DO CICLO -----
-    function regenerateAllMazesForCycle() {
+    // ----- REGENERAR TODOS OS LABIRINTOS DO CICLO -----
+    function regenerateAllMazes() {
         let mazes = [];
         for (let lvl = 1; lvl <= 20; lvl++) {
-            let numEnt = entranceCountsPerPhase[lvl-1];
-            // saída fixa em (15,15) para todas as fases (borda inferior direita)
-            let exitCoord = { x: SIZE-2, y: SIZE-2 };
-            let { maze, entrances } = generateMazeWithExitAndEntrances(exitCoord.x, exitCoord.y, numEnt);
-            mazes.push({ maze, entrances, exit: exitCoord });
+            let numEnt = entranceCounts[lvl-1];
+            let { maze, entrances } = generateMazeWithExitAndEntrances(SIZE-2, SIZE-2, numEnt);
+            mazes.push({ maze, entrances });
         }
         return mazes;
     }
     
-    let currentMazeData = null;
-    
+    // ----- CARREGAR FASE -----
     function loadLevel(level) {
         if (!mazeCache[level-1]) {
-            mazeCache = regenerateAllMazesForCycle();
+            mazeCache = regenerateAllMazes();
         }
         const data = mazeCache[level-1];
         currentMaze = data.maze.map(row => [...row]);
         entrances = [...data.entrances];
-        exitPos = { x: data.exit.x, y: data.exit.y };
-        player = null;  // ainda não escolheu entrada
+        exitPos = { x: SIZE-2, y: SIZE-2 };
+        player = null;
         currentMaze[exitPos.x][exitPos.y] = 0;
         levelDisplay.innerText = `FASE ${level} / 20`;
         entranceCountSpan.innerText = `🚪 Entradas: ${entrances.length}`;
         applyPhaseStyle(level);
         drawMaze();
         clearActivePath();
-        msgDiv.innerHTML = `🌟 FASE ${level}! Clique em uma das ${entrances.length} ENTRADAS (círculos verdes) para começar.`;
+        msgDiv.innerHTML = `🌟 FASE ${level}! Clique em uma das ${entrances.length} ENTRADAS (verdes) para começar.`;
     }
     
     function chooseEntrance(entrance) {
         if (player) return;
         player = { x: entrance.x, y: entrance.y };
-        msgDiv.innerHTML = `🚪 Você entrou por (${entrance.y},${entrance.x}). Use as setas até a ESTRELA!`;
+        msgDiv.innerHTML = `🚪 Entrada escolhida! Use as setas até a ⭐.`;
         drawMaze();
     }
     
     function nextCycle() {
         currentCycle++;
         cycleDisplay.innerText = `🔄 Ciclo ${currentCycle}`;
-        mazeCache = regenerateAllMazesForCycle();
+        mazeCache = regenerateAllMazes();
         currentLevel = 1;
         loadLevel(currentLevel);
         msgDiv.innerHTML = `🌀 CICLO ${currentCycle}! Todas as rotas e entradas foram renovadas.`;
@@ -438,7 +424,7 @@
             currentLevel++;
             loadLevel(currentLevel);
         } else {
-            msgDiv.innerHTML = `🎉 PARABÉNS! Ciclo ${currentCycle} concluído! Gerando novo ciclo... 🎉`;
+            msgDiv.innerHTML = `🎉 CICLO ${currentCycle} concluído! Gerando novo ciclo... 🎉`;
             nextCycle();
         }
         drawMaze();
@@ -509,33 +495,39 @@
         if (player.x === exitPos.x && player.y === exitPos.y) winLevel();
         return true;
     }
-     // ----- DESENHO COMPLETO -----
+      // ----- DESENHO DO LABIRINTO (estilo imagem referência: paredes nítidas, caminho claro) -----
     function drawMaze() {
         cellSize = canvas.width / SIZE;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const phase = currentLevel;
-        const style = phaseStyles[(phase-1) % 20];
+        
+        // usar cores da fase atual (definidas por applyPhaseStyle)
+        const wallLight = window._wallLight || "#a77f56";
+        const wallDark = window._wallDark || "#7c5a3a";
+        const floorLight = window._floorLight || "#fff1dc";
+        const floorDark = window._floorDark || "#f5e8cd";
         
         for (let i = 0; i < SIZE; i++) {
             for (let j = 0; j < SIZE; j++) {
                 let x = j * cellSize;
                 let y = i * cellSize;
                 if (currentMaze[i][j] === 1) {
-                    ctx.fillStyle = style.wallColor;
+                    // parede com relevo
+                    ctx.fillStyle = wallLight;
                     ctx.fillRect(x, y, cellSize, cellSize);
-                    ctx.fillStyle = style.wallDark;
+                    ctx.fillStyle = wallDark;
                     ctx.fillRect(x+2, y+2, cellSize-4, cellSize-4);
                 } else {
-                    ctx.fillStyle = style.floorColor;
+                    // caminho claro
+                    ctx.fillStyle = floorLight;
                     ctx.fillRect(x, y, cellSize, cellSize);
-                    ctx.fillStyle = style.floorLight;
+                    ctx.fillStyle = floorDark;
                     ctx.fillRect(x+1, y+1, cellSize-2, cellSize-2);
                 }
             }
         }
         
         // Desenhar saída (estrela)
-        ctx.font = `${Math.floor(cellSize * 0.6)}px monospace`;
+        ctx.font = `${Math.floor(cellSize * 0.55)}px monospace`;
         ctx.fillStyle = "#f5b042";
         ctx.fillText("⭐", exitPos.y * cellSize + cellSize*0.2, exitPos.x * cellSize + cellSize*0.8);
         
@@ -543,14 +535,14 @@
         for (let ent of entrances) {
             ctx.fillStyle = "#2ecc71";
             ctx.beginPath();
-            ctx.arc(ent.y * cellSize + cellSize/2, ent.x * cellSize + cellSize/2, cellSize*0.25, 0, Math.PI*2);
+            ctx.arc(ent.y * cellSize + cellSize/2, ent.x * cellSize + cellSize/2, cellSize*0.22, 0, Math.PI*2);
             ctx.fill();
-            ctx.fillStyle = "#fff";
+            ctx.fillStyle = "#1e5a2e";
             ctx.font = `${Math.floor(cellSize * 0.25)}px monospace`;
             ctx.fillText("🚪", ent.y * cellSize + cellSize*0.35, ent.x * cellSize + cellSize*0.7);
         }
         
-        // Caminho guia
+        // Caminho guia (pontilhado)
         if (activePath && activePath.cells) {
             ctx.beginPath();
             ctx.setLineDash([4, 6]);
@@ -572,18 +564,18 @@
             ctx.fillStyle = "#ffcc88aa";
             for (let cell of activePath.cells) {
                 ctx.beginPath();
-                ctx.arc(cell.y * cellSize + cellSize/2, cell.x * cellSize + cellSize/2, cellSize*0.2, 0, Math.PI*2);
+                ctx.arc(cell.y * cellSize + cellSize/2, cell.x * cellSize + cellSize/2, cellSize*0.18, 0, Math.PI*2);
                 ctx.fill();
             }
         }
         
-        // Desenhar jogador (se existir)
+        // Desenhar jogador (robozinho)
         if (player) {
             let px = player.y * cellSize;
             let py = player.x * cellSize;
             ctx.fillStyle = "#3d7ca3";
             ctx.beginPath();
-            ctx.arc(px + cellSize/2, py + cellSize/2, cellSize*0.32, 0, Math.PI*2);
+            ctx.arc(px + cellSize/2, py + cellSize/2, cellSize*0.3, 0, Math.PI*2);
             ctx.fill();
             ctx.fillStyle = "#f4f0c0";
             ctx.beginPath();
@@ -594,12 +586,12 @@
             ctx.fillRect(px + cellSize*0.4, py + cellSize*0.6, cellSize*0.2, cellSize*0.1);
             ctx.fillStyle = "#ff8c5a";
             ctx.beginPath();
-            ctx.ellipse(px + cellSize/2, py + cellSize*0.75, cellSize*0.2, cellSize*0.1, 0, 0, Math.PI*2);
+            ctx.ellipse(px + cellSize/2, py + cellSize*0.75, cellSize*0.18, cellSize*0.09, 0, 0, Math.PI*2);
             ctx.fill();
         }
     }
     
-    // ----- EVENTOS DE CLICK NO CANVAS (selecionar entrada) -----
+    // ----- EVENTO DE CLICK NO CANVAS (selecionar entrada) -----
     canvas.addEventListener("click", (e) => {
         if (player) return;
         const rect = canvas.getBoundingClientRect();
@@ -664,11 +656,11 @@
         totalPoints = 0;
         pointsSpan.innerText = "⭐ 0 pontos";
         cycleDisplay.innerText = "🔄 Ciclo 1";
-        mazeCache = regenerateAllMazesForCycle();
+        mazeCache = regenerateAllMazes();
         loadLevel(1);
         drawMaze();
     }
     init();
 </script>
 </body>
-</html> 
+</html>  
